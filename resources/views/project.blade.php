@@ -37,7 +37,13 @@
                         @endif
                     </td>
                     <td class="border border-gray-300 px-4 py-2">
-                        <a href="{{ route('bill.show', $bill->id) }}" class="text-blue-500">View Details</a>
+                    <a href="{{ route('bill.show', $bill->id) }}" class="text-blue-500">View Details</a>
+                  <form action="{{ route('bill.destroy', $bill) }}" method="POST">
+                  @method('DELETE')
+                  @csrf
+                      <button type="submit" class ="bg-red-600 p-4 text-white">
+                        Delete
+                      </button>
                     </td>
                 </tr>
             @endforeach

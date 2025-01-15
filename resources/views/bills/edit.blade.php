@@ -1,7 +1,7 @@
 <x-mylayout>
     <x-slot:headerTitle>{{ $pagetitle }}</x-slot:headerTitle>
 
-    <form action="{{ route('bill.update', $bill) }}" method="POST">
+    <form action="{{ route('bill.update', $bill->id) }}" method="POST">
         @method('PUT')
         @csrf
         {{-- Subscription field --}}
@@ -71,5 +71,5 @@
         </button>
     </form>
 
-    <x-buttonhome>Back to Home</x-buttonhome>
+    <x-buttonbackproject>Back to Home</x-buttonbackproject>
 </x-mylayout>

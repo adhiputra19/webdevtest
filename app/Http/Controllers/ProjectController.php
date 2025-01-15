@@ -15,7 +15,7 @@ class ProjectController extends Controller
 
     public function index()
     {
-        $bills = Bill::all(); // Retrieve all bills
+        $bills = Bill::orderBy('created_at', 'desc')->get(); // Retrieve all bills in descending order
         return view('project', compact('bills')); // Pass data to the view
     }
 
@@ -40,15 +40,16 @@ class ProjectController extends Controller
         Bill::create($validated);
 
         return redirect()->route('bill.index')->with('success', 'Bill created successfully.');
-
     }
-    function edit(Bill $bill){
+    
+    public function edit(Bill $bill){
         return view ('bills.edit',[
             "pagetitle" => "Edit Bill",
             "bill" => $bill
         ]);
     }
-    function update(Bill $bill, Request $request){
+    
+    public function update(Bill $bill, Request $request){
         $validated = $request->validate([
             'subscription' => 'required|string|max:255',
             'price' => 'required|numeric|max:999999.99', // Sesuaikan batas maksimum jika perlu
@@ -60,7 +61,11 @@ class ProjectController extends Controller
 
         $bill->update($validated);
 
-        return redirect()->route('bill.index')->with('success', 'Client updated successfully.');
+        return redirect()->route('bill.index')->with('success', 'Bill updated successfully.');
     }
-
+    public function destroy(Bill $bill){
+        // delete all related projects
+        $bill->delete();
+        return redirect()->route('bill.index')->with('success', 'Client deleted successfully.');
+    }
 }

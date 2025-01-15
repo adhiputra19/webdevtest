@@ -70,5 +70,5 @@
         </button>
     </form>
 
-    <x-buttonhome>Back to Home</x-buttonhome>
+    <x-buttonbackproject>Back to Home</x-buttonbackproject>
 </x-mylayout>
