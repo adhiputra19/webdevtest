@@ -8,4 +8,10 @@
     <p><strong>Payment Method:</strong> {{ $bill->payment_method }}</p>
     <p><strong>Note:</strong> {{ $bill->note }}</p>
     <x-buttonbackproject></x-buttonbackproject>
+    <div class="mb-4">
+        <a href="{{ route('bill.edit') }}"
+           class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+            Edit Bill
+        </a>
+    </div>
 </x-mylayout>

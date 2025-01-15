@@ -16,14 +16,4 @@ Route::get('/bill/{id}', [ProjectController::class, 'show'])->name('bill.show');
 
 Route::get('/bill/createpage', [ProjectController::class, 'createpage'])->name('bill.create'); // Updated route for creating a bill
 
-Route::get('/clientlist', function () {
-    return view('client', [
-        "pagetitle" => "Client List"
-    ]);
-});
-
-Route::get('/welcome', function () {
-    return view('welcome', [
-        "pagetitle" => "Welcome"
-    ]);
-});
+Route::get('/bill/{id}/edit', [ProjectController::class, 'edit'])->name('bill.edit'); // Updated route for editing a bill

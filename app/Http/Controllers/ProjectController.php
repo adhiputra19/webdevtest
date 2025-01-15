@@ -19,12 +19,10 @@ class ProjectController extends Controller
         return view('project', compact('bills')); // Pass data to the view
     }
 
-    public function createpage(){
-        // return view('bills.create', [
-        //     "pagetitle" => "Test Create Bill"
-        // ]);
-        $bill = Bill::findOrFail(1); // Retrieve the specific bill
-        return view('bill_detail', compact('bill')); // Pass data to the detail view
+    public function create(){
+        return view('bills.create', [
+            "pagetitle" => "Test Create Bill"
+        ]);
     }
 
     public function store(Request $request)
@@ -44,4 +42,25 @@ class ProjectController extends Controller
         return redirect()->route('bill.index')->with('success', 'Bill created successfully.');
 
     }
+    function edit(Bill $bill){
+        return view ('bills.edit',[
+            "pagetitle" => "Edit Bill",
+            "bill" => $bill
+        ]);
+    }
+    function update(Bill $bill, Request $request){
+        $validated = $request->validate([
+            'subscription' => 'required|string|max:255',
+            'price' => 'required|numeric|max:999999.99', // Sesuaikan batas maksimum jika perlu
+            'date' => 'required|date',
+            'frequency' => 'required|integer|max:20',
+            'payment_method' => 'required|string|max:20',
+            'note' => 'required|string|max:255' // Ubah text menjadi string
+        ]);
+
+        $bill->update($validated);
+
+        return redirect()->route('bill.index')->with('success', 'Client updated successfully.');
+    }
+
 }
